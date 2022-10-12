@@ -3,10 +3,24 @@ import { StackScreenProps } from "@react-navigation/stack";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { View, Text, Pressable } from "react-native";
+import { useState, useEffect } from "react";
+import api from "../../api";
 import * as C from "./Styles";
 import Nav from "../nav/Nav";
+import { Tables, Books } from "../../types";
 
 export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
+  const [data, setData] = useState<Tables>([]);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await api.get("/allTables");
+      setData(data);
+    })();
+  }, []);
+
+  console.log(data);
+
   return (
     <C.Container>
       <View
@@ -44,6 +58,7 @@ export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
             <Ionicons name="arrow-forward" size={25} color="#292727" />
           </View>
         </View>
+        <Text>{data[0].id}</Text>
       </View>
       <Nav />
     </C.Container>
