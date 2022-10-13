@@ -27,7 +27,7 @@ export default function BookTable({ table, setBookPress }: Props) {
   let daysInMonth = new Date(year, month, 0).getDate();
 
   useEffect(() => {
-    const allDaysAvaiable = [];
+    let allDaysAvaiable = [];
 
     for (let i = 0; i < 7; i++) {
       if (today === daysInMonth) {
@@ -53,6 +53,8 @@ export default function BookTable({ table, setBookPress }: Props) {
             return e;
           }
         });
+
+        allDaysAvaiable = filteredDays;
       }
 
       setNextSeven(filteredDays);
