@@ -1,16 +1,17 @@
-import { ParamListBase } from "@react-navigation/native";
-import { StackScreenProps } from "@react-navigation/stack";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View, Text, Pressable } from "react-native";
+import { View, Text } from "react-native";
 import { useState, useEffect } from "react";
 import api from "../../api";
 import * as C from "./Styles";
 import Nav from "../nav/Nav";
-import { Tables, Books } from "../../types";
+import { Tables } from "../../types";
+import BookTable from "../BookTable/BookTable";
 
-export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
-  const [data, setData] = useState<Tables>([]);
+export default function Home() {
+  const [data, setData] = useState<Tables[]>([]);
+  const [selectedTable, setSelectedTable] = useState<Tables>();
+  const [bookPress, setBookPress] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -18,8 +19,6 @@ export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
       setData(data);
     })();
   }, []);
-
-  console.log(data);
 
   return (
     <C.Container>
@@ -58,8 +57,48 @@ export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
             <Ionicons name="arrow-forward" size={25} color="#292727" />
           </View>
         </View>
-        <Text>{data[0].id}</Text>
+
+        {data.map((t) => (
+          <C.TablesAv key={t.id as React.Key}>
+            <View>
+              <Text
+                style={{
+                  fontFamily: "POPPINSR",
+                  fontSize: 16,
+                  color: "#292727",
+                }}
+              >
+                Table {t.table_num.toString()} - {t.chairs.toString()} Chairs
+              </Text>
+              <Text
+                style={{
+                  fontFamily: "POPPINSR",
+                  fontSize: 16,
+                  color: "#727272",
+                }}
+              >
+                ${t.price.toString()}.00
+              </Text>
+            </View>
+            <C.BookBtn
+              onPress={() => (setSelectedTable(t), setBookPress(true))}
+            >
+              <Text
+                style={{
+                  fontFamily: "POPPINSM",
+                  fontSize: 16,
+                  color: "#FFF",
+                }}
+              >
+                Book
+              </Text>
+            </C.BookBtn>
+          </C.TablesAv>
+        ))}
       </View>
+      {selectedTable && bookPress && (
+        <BookTable table={selectedTable} setBookPress={setBookPress} />
+      )}
       <Nav />
     </C.Container>
   );

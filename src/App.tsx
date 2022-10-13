@@ -15,7 +15,7 @@ export function EnterPage({ navigation }: StackScreenProps<ParamListBase>) {
     DMSERIF: require("../assets/fonts/DMSerifText-Regular.ttf"),
     POPPINSB: require("../assets/fonts/Poppins-Bold.ttf"),
     POPPINSR: require("../assets/fonts/Poppins-Regular.ttf"),
-    POPPINSM: require("../assets/fonts/Poppins-Medium.ttf"),
+    POPPINSM: require("../assets/fonts/Poppins-SemiBold.ttf"),
   });
 
   if (!fonstLoaded) {
