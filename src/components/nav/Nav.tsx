@@ -2,6 +2,7 @@ import * as C from "./Styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ParamListBase } from "@react-navigation/native";
+import { useState } from "react";
 
 export default function Nav({ navigation }: StackScreenProps<ParamListBase>) {
   return (

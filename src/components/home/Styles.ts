@@ -38,3 +38,23 @@ export const TablesAv = styled.View`
   shadowopacity: 1;
   shadowradius: 10px;
 `;
+
+export const EnterBtn = styled.Pressable`
+  background-color: #f2ae30;
+  display: flex;
+  width: 100%;
+  height: 54px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 5px;
+`;
+
+export const EditTableBtn = styled.Pressable`
+  background-color: #f2ae30;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+`;

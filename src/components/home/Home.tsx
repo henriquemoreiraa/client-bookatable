@@ -1,5 +1,5 @@
 import React from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { FontAwesome, AntDesign, Ionicons } from "@expo/vector-icons";
 import { View, Text } from "react-native";
 import { useState, useEffect } from "react";
 import api from "../../api";
@@ -10,10 +10,19 @@ import BookTable from "../BookTable/BookTable";
 import { ParamListBase } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
-export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
+type Props = {
+  isAdmin: boolean;
+};
+
+export default function Home({
+  navigation,
+  route,
+}: StackScreenProps<ParamListBase>) {
   const [data, setData] = useState<Tables[]>([]);
   const [selectedTable, setSelectedTable] = useState<Tables>();
   const [bookPress, setBookPress] = useState(false);
+
+  const { isAdmin }: any = route.params;
 
   useEffect(() => {
     (async () => {
@@ -58,6 +67,25 @@ export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
             </Text>
             <Ionicons name="arrow-forward" size={25} color="#292727" />
           </View>
+
+          {isAdmin && (
+            <View
+              style={{ display: "flex", flexDirection: "row", marginTop: 30 }}
+            >
+              <Text
+                style={{
+                  fontSize: 21,
+                  fontWeight: "500",
+                  color: "#292727",
+                  fontFamily: "POPPINSM",
+                  marginRight: 10,
+                }}
+              >
+                Create new Table
+              </Text>
+              <AntDesign name="pluscircle" size={30} color="#F2AE30" />
+            </View>
+          )}
         </View>
 
         {data.map((t) => (
@@ -82,19 +110,25 @@ export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
                 ${t.price.toString()}.00
               </Text>
             </View>
-            <C.BookBtn
-              onPress={() => (setSelectedTable(t), setBookPress(true))}
-            >
-              <Text
-                style={{
-                  fontFamily: "POPPINSM",
-                  fontSize: 16,
-                  color: "#FFF",
-                }}
+            {!isAdmin ? (
+              <C.BookBtn
+                onPress={() => (setSelectedTable(t), setBookPress(true))}
               >
-                Book
-              </Text>
-            </C.BookBtn>
+                <Text
+                  style={{
+                    fontFamily: "POPPINSM",
+                    fontSize: 16,
+                    color: "#FFF",
+                  }}
+                >
+                  Book
+                </Text>
+              </C.BookBtn>
+            ) : (
+              <C.EditTableBtn>
+                <FontAwesome name="pencil" size={20} color="#fff" />
+              </C.EditTableBtn>
+            )}
           </C.TablesAv>
         ))}
       </View>

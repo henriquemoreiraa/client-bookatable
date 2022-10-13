@@ -132,24 +132,3 @@ export default function BooksT({
     </C.Container>
   );
 }
-
-// <View
-// style={{
-//   display: "flex",
-//   flexDirection: "row",
-//   alignItems: "center",
-// }}
-// >
-// <Text
-//   style={{
-//     fontSize: 21,
-//     fontWeight: "500",
-//     color: "#292727",
-//     fontFamily: "POPPINSM",
-//     marginRight: 10,
-//   }}
-// >
-//   Create new Table
-//   <AntDesign name="pluscircle" size={30} color="black" />
-// </Text>
-// </View>
