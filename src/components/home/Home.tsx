@@ -7,8 +7,10 @@ import * as C from "./Styles";
 import Nav from "../nav/Nav";
 import { Tables } from "../../types";
 import BookTable from "../BookTable/BookTable";
+import { ParamListBase } from "@react-navigation/native";
+import { StackScreenProps } from "@react-navigation/stack";
 
-export default function Home() {
+export default function Home({ navigation }: StackScreenProps<ParamListBase>) {
   const [data, setData] = useState<Tables[]>([]);
   const [selectedTable, setSelectedTable] = useState<Tables>();
   const [bookPress, setBookPress] = useState(false);
@@ -99,7 +101,7 @@ export default function Home() {
       {selectedTable && bookPress && (
         <BookTable table={selectedTable} setBookPress={setBookPress} />
       )}
-      <Nav />
+      <Nav navigation={navigation} route={{ key: "", name: "" }} />
     </C.Container>
   );
 }

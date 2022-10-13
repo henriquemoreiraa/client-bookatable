@@ -1,9 +1,9 @@
-import * as C from "./Styles";
-import { TablesAv } from "../home/Styles";
-import { AntDesign } from "@expo/vector-icons";
 import { View, Text, Pressable, TextInput } from "react-native";
 import { Tables, DataBookTable } from "../../types";
+import { AntDesign } from "@expo/vector-icons";
+import { TablesAv } from "../home/Styles";
 import { useEffect, useState } from "react";
+import * as C from "./Styles";
 import api from "../../api";
 
 type Props = {
@@ -62,10 +62,17 @@ export default function BookTable({ table, setBookPress }: Props) {
       setNextSeven(allDaysAvaiable);
     }
   }, []);
-  console.log(table);
+
   const handleBookTable = () => {
     const { name, date, hour, tableId } = dataBookTable;
-    api.post("/bookTable", { name, date, hour, tableId });
+
+    if (!name || !date || !hour) {
+      alert("Please add all fields!");
+    } else {
+      api.post("/bookTable", { name, date, hour, tableId });
+
+      setBookPress(false);
+    }
   };
 
   return (
@@ -150,6 +157,7 @@ export default function BookTable({ table, setBookPress }: Props) {
                       date: `${d}/${year}`,
                     }))
                   }
+                  key={d as React.Key}
                 >
                   <Text
                     key={d as React.Key}

@@ -2,13 +2,11 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   width: 100%;
-  height: 73%;
   background-color: #f2ae30;
   position: absolute;
   bottom: 0;
   z-index: 1;
   border-radius: 10px;
-  /* border: 1px solid #d4d4d4; */
   padding: 10px;
 `;
 
@@ -19,6 +17,7 @@ export const FinishBtn = styled.Pressable`
   height: 54px;
   justify-content: center;
   align-items: center;
+  margin: 20px 0 5px;
 `;
 
 export const TablesOP = styled.View`

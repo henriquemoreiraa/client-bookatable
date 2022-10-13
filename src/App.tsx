@@ -9,6 +9,9 @@ import {
   StackScreenProps,
 } from "@react-navigation/stack";
 import Home from "./components/home/Home";
+import Nav from "./components/nav/Nav";
+import Settings from "./components/Settings/Settings";
+import Books from "./components/Books/Books";
 
 export function EnterPage({ navigation }: StackScreenProps<ParamListBase>) {
   const [fonstLoaded] = useFonts({
@@ -80,11 +83,12 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Enter Page
+        initialRouteName="Home
       "
       >
-        <Stack.Screen name="Enter Page" component={EnterPage} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="Books" component={Books} />
       </Stack.Navigator>
     </NavigationContainer>
   );
