@@ -43,7 +43,6 @@ export default function EditDelTable({
       } else {
         api.post("/newTable", { table_num, chairs, price });
         setETablePress(false);
-        setIsAdm(!isAdm);
       }
     } else {
       if (!table_numE || !chairsE || !priceE) {
@@ -59,7 +58,6 @@ export default function EditDelTable({
 
         api.put(`/updateTable/${table.id}`, { table_num, chairs, price });
         setETablePress(false);
-        setIsAdm(!isAdm);
       }
     }
   };
@@ -67,7 +65,6 @@ export default function EditDelTable({
   const handleDeleteTable = () => {
     api.delete(`/deleteTable/${table.id}`);
     setETablePress(false);
-    setIsAdm(!isAdm);
   };
 
   return (
