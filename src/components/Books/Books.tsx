@@ -18,7 +18,7 @@ export default function BooksT({
   useEffect(() => {
     (async () => {
       const { data } = await api.get("/allBookedTables");
-      const bdata: Books[] = data;
+      const bdata: Books[] = data.reverse();
 
       let filteredData = bdata.filter((e) => {
         const dayN = e.date.slice(0, 2);

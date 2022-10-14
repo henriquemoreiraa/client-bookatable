@@ -9,9 +9,18 @@ import { Tables } from "../../types";
 import BookTable from "../BookTable/BookTable";
 import { ParamListBase } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
+import EditDelTable from "../EditDelTable/EditDelTable";
 
 type Props = {
   isAdmin: boolean;
+};
+
+const empTable = {
+  id: "",
+  table_num: 0,
+  chairs: 0,
+  price: 0,
+  Book: [],
 };
 
 export default function Home({
@@ -21,15 +30,23 @@ export default function Home({
   const [data, setData] = useState<Tables[]>([]);
   const [selectedTable, setSelectedTable] = useState<Tables>();
   const [bookPress, setBookPress] = useState(false);
+  const [eTablePress, setETablePress] = useState(false);
+  const [isEditCreate, setIsEditCreate] = useState(0);
+  const [isAdm, setIsAdm] = useState(false);
 
   const { isAdmin }: any = route.params;
 
   useEffect(() => {
     (async () => {
       const { data } = await api.get("/allTables");
-      setData(data);
+      const reverse = data.reverse();
+      setData(reverse);
     })();
-  }, []);
+
+    if (isAdmin) {
+      setIsAdm(true);
+    }
+  }, [isAdmin, isAdm]);
 
   return (
     <C.Container>
@@ -68,7 +85,7 @@ export default function Home({
             <Ionicons name="arrow-forward" size={25} color="#292727" />
           </View>
 
-          {isAdmin && (
+          {isAdm && (
             <View
               style={{ display: "flex", flexDirection: "row", marginTop: 30 }}
             >
@@ -83,7 +100,16 @@ export default function Home({
               >
                 Create new Table
               </Text>
-              <AntDesign name="pluscircle" size={30} color="#F2AE30" />
+              <AntDesign
+                onPress={() => (
+                  setETablePress(true),
+                  setSelectedTable(empTable),
+                  setIsEditCreate(1)
+                )}
+                name="pluscircle"
+                size={30}
+                color="#F2AE30"
+              />
             </View>
           )}
         </View>
@@ -110,7 +136,7 @@ export default function Home({
                 ${t.price.toString()}.00
               </Text>
             </View>
-            {!isAdmin ? (
+            {!isAdm ? (
               <C.BookBtn
                 onPress={() => (setSelectedTable(t), setBookPress(true))}
               >
@@ -125,7 +151,11 @@ export default function Home({
                 </Text>
               </C.BookBtn>
             ) : (
-              <C.EditTableBtn>
+              <C.EditTableBtn
+                onPress={() => (
+                  setSelectedTable(t), setETablePress(true), setIsEditCreate(0)
+                )}
+              >
                 <FontAwesome name="pencil" size={20} color="#fff" />
               </C.EditTableBtn>
             )}
@@ -134,6 +164,15 @@ export default function Home({
       </View>
       {selectedTable && bookPress && (
         <BookTable table={selectedTable} setBookPress={setBookPress} />
+      )}
+      {selectedTable && eTablePress && (
+        <EditDelTable
+          table={selectedTable}
+          isEditCreate={isEditCreate}
+          setETablePress={setETablePress}
+          setIsAdm={setIsAdm}
+          isAdm={isAdm}
+        />
       )}
       <Nav navigation={navigation} route={{ key: "", name: "" }} />
     </C.Container>

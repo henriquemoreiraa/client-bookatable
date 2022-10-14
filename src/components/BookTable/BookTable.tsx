@@ -186,6 +186,7 @@ export default function BookTable({ table, setBookPress }: Props) {
             >
               {["12:00", "02:00", "04:00", "06:00", "08:00"].map((h) => (
                 <Pressable
+                  key={h}
                   onPress={() =>
                     setDataBookTable((prevState) => ({
                       ...prevState,

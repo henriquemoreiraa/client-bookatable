@@ -75,7 +75,6 @@ export default function Settings({
           </C.EnterBtn>
         </View>
       </View>
-
       <Nav navigation={navigation} route={{ key: "", name: "" }} />
     </C.Container>
   );

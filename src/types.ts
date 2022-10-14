@@ -3,7 +3,7 @@ export type Tables = {
   table_num: Number;
   chairs: Number;
   price: Number;
-  Book: Books[];
+  Book: Books[] | [];
 };
 
 export type Books = {
@@ -20,4 +20,17 @@ export type DataBookTable = {
   date: String;
   hour: String;
   tableId: String;
+};
+
+export type DataNewTable = {
+  table_num: Number | null;
+  chairs: Number | null;
+  price: Number | null;
+};
+
+export type DataEditTable = {
+  id: String;
+  table_numE: Number;
+  chairsE: Number;
+  priceE: Number;
 };
