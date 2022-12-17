@@ -4,7 +4,7 @@ A mobile app to book tables at a restaurant
 
 ## How it works
 
-<img style="border-radius: 5px" src="./screenshot/bookatable.gif">
+<p align="center" ><img style="border-radius: 5px" src="./screenshot/bookatable.gif"></p>
 
 ## Features
 
